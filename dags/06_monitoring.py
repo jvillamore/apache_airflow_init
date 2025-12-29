@@ -1,12 +1,18 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 from datetime import datetime
 
 
+def my_python_task():
+    print("Ejecutando tarea 4")
+    # raise Exception("Fallo intencional de la tarea 4 para monitoreo")
+
+
 with DAG(
-    dag_id="05_1_orquestacion",
-    description="Orquestación de tareas con dependencias simples",
-    schedule='@monthly',
+    dag_id="06_monitoring",
+    description="Orquestación de tareas con cronjob",
+    schedule='* * * * *',
     start_date=datetime(2025, 12, 29),
     end_date=datetime(2025, 12, 30),
     default_args={
@@ -26,9 +32,9 @@ with DAG(
         task_id='tarea_3',
         bash_command='sleep 2 && echo "Ejecutando tarea 3"'
     )
-    t4 = BashOperator(
+    t4 = PythonOperator(
         task_id='tarea_4',
-        bash_command='sleep 2 &&echo "Ejecutando tarea 4"'
+        python_callable=my_python_task
     )
 
     t1 >> t2 >> [t3, t4]

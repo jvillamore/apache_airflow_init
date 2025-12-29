@@ -4,8 +4,9 @@ from datetime import datetime
 
 
 with DAG(
-    dag_id="05_1_orquestacion",
-    description="Orquestación de tareas con dependencias simples",
+    dag_id="05_3_orquestacion",
+    description="Orquestación de tareas con cronjob",
+    # Considerar que se ejecuta una vez al mes al finalizar el intervalo.
     schedule='@monthly',
     start_date=datetime(2025, 12, 29),
     end_date=datetime(2025, 12, 30),
