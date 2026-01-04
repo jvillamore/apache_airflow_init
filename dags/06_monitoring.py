@@ -26,7 +26,7 @@ with DAG(
     )
     t2 = BashOperator(
         task_id='tarea_2',
-        bash_command='sleep 2 && echo "Ejecutando tarea 2"'
+        bash_command='sleep 2 && echo "Ejecutando tarea 2'
     )
     t3 = BashOperator(
         task_id='tarea_3',
